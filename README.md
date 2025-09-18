@@ -49,5 +49,11 @@ To get a local copy up and running, follow these simple steps.
     flutter pub get
     ```
 4.  Run the application on your emulator or physical device:
-    ```sh
-    flutter run
+    ```sh flutter run
+![IMG-20250918-WA0024](https://github.com/user-attachments/assets/5f33e106-fcfa-4d19-8c9e-a49c861c1416)
+![IMG-20250918-WA0026](https://github.com/user-attachments/assets/569f404e-396d-48d5-86f8-eb3169f6e5ec)
+![IMG-20250918-WA0025](https://github.com/user-attachments/assets/c28cefa0-7a45-404e-a355-ff5e5f722a38)
+![IMG-20250918-WA0027](https://github.com/user-attachments/assets/b14066a4-8e86-4e12-a198-657731bdc3fa)
+
+
+   
