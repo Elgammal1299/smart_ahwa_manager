@@ -13,7 +13,7 @@ class SmartAhwaManager extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Smart Ahwa Manager',
-
+      debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.splasahRouter,
       onGenerateRoute: AppRouter.generateRoute,
     );

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:smart_ahwa_manager/core/utils/app_colors.dart';
 import 'package:smart_ahwa_manager/core/utils/size_config.dart';
 
 abstract class AppStyles {
   static TextStyle styleRegular16(context) {
     return TextStyle(
-      color: const Color(0xFF064060),
+      color: AppColors.textSecondary,
       fontSize: getResponsiveFontSize(context, fontSize: 16),
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400,
@@ -13,7 +14,7 @@ abstract class AppStyles {
 
   static TextStyle styleBold16(BuildContext context) {
     return TextStyle(
-      color: const Color(0xFF4EB7F2),
+      color: AppColors.primary,
       fontSize: getResponsiveFontSize(context, fontSize: 16),
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w700,
@@ -67,10 +68,10 @@ abstract class AppStyles {
 
   static TextStyle styleSemiBold24(BuildContext context) {
     return TextStyle(
-      color: const Color(0xFF4EB7F2),
+      color: AppColors.primary,
       fontSize: getResponsiveFontSize(context, fontSize: 24),
       fontFamily: 'Montserrat',
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.bold,
     );
   }
 
