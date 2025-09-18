@@ -95,12 +95,12 @@ class NavBarScreen extends StatelessWidget {
 
           borderRadius: BorderRadius.circular(100),
         ),
-        child: SvgPicture.asset(selectedIcon, width: 50, height: 50),
+        child: SvgPicture.asset(selectedIcon, width: 30, height: 30),
       ),
       icon: Container(
         padding: const EdgeInsets.symmetric(vertical: 5),
 
-        child: SvgPicture.asset(unselectedIcon, width: 40, height: 40),
+        child: SvgPicture.asset(unselectedIcon, width: 30, height: 30),
       ),
       label: title,
     );

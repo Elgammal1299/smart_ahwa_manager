@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_ahwa_manager/core/utils/app_colors.dart';
+import 'package:smart_ahwa_manager/core/utils/app_styles.dart';
 import 'package:smart_ahwa_manager/feature/home/view_model/order_cubit/order_cubit.dart';
 
 class OrderScreen extends StatefulWidget {
@@ -23,10 +25,21 @@ class _OrderScreenState extends State<OrderScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text("الطلبات"),
+        centerTitle: true,
+        title: Text(
+          "الطلبات",
+          style: AppStyles.styleSemiBold20(
+            context,
+          ).copyWith(color: Colors.white),
+        ),
+        backgroundColor: AppColors.primary,
         bottom: TabBar(
           controller: _tabController,
+          indicatorColor: AppColors.secondary,
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white70,
           tabs: const [
             Tab(text: "المعلّقة"),
             Tab(text: "المكتملة"),
@@ -68,6 +81,7 @@ class _OrderScreenState extends State<OrderScreen>
       return Center(
         child: Text(
           isPending ? "لا توجد طلبات معلّقة" : "لا توجد طلبات مكتملة",
+          style: const TextStyle(fontSize: 16, color: AppColors.textSecondary),
         ),
       );
     }
@@ -76,23 +90,34 @@ class _OrderScreenState extends State<OrderScreen>
       padding: const EdgeInsets.all(12),
       itemBuilder: (context, index) {
         final order = orders[index];
-        return Card(
+        return Container(
           margin: const EdgeInsets.symmetric(vertical: 8),
-          shape: RoundedRectangleBorder(
+          decoration: BoxDecoration(
+            color: AppColors.cardBackground,
             borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: isPending ? AppColors.warning : AppColors.success,
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.15),
+                blurRadius: 6,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
-          elevation: 4,
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  radius: 24,
-                  backgroundColor: Colors.brown.shade100,
+                  radius: 28,
+                  backgroundColor: AppColors.secondary.withOpacity(0.2),
                   child: Icon(
                     Icons.local_cafe,
-                    color: Colors.brown.shade700,
+                    color: AppColors.primary,
                     size: 28,
                   ),
                 ),
@@ -103,16 +128,17 @@ class _OrderScreenState extends State<OrderScreen>
                     children: [
                       Text(
                         order.customerName,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppStyles.styleSemiBold20(context),
                       ),
                       const SizedBox(height: 6),
                       Text(
                         "${order.drink} - ${order.addition ?? "بدون إضافات"}",
+                        style: const TextStyle(color: AppColors.textSecondary),
                       ),
-                      Text("الكمية: ${order.quantity}"),
+                      Text(
+                        "الكمية: ${order.quantity}",
+                        style: const TextStyle(color: AppColors.textSecondary),
+                      ),
                     ],
                   ),
                 ),
@@ -124,21 +150,22 @@ class _OrderScreenState extends State<OrderScreen>
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                        color: AppColors.success,
                       ),
                     ),
+                    const SizedBox(height: 8),
                     if (isPending)
                       IconButton(
                         icon: const Icon(
                           Icons.check_circle,
-                          color: Colors.green,
+                          color: AppColors.success,
                         ),
                         onPressed: () {
                           context.read<OrderCubit>().completeOrder(index);
                         },
                       ),
                     IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
+                      icon: const Icon(Icons.delete, color: AppColors.error),
                       onPressed: () {
                         context.read<OrderCubit>().removeOrder(index);
                       },
