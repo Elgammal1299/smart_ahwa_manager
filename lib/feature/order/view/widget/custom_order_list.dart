@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_ahwa_manager/core/utils/app_colors.dart';
-import 'package:smart_ahwa_manager/feature/home/view/widget/custom_order_item_card.dart';
+import 'package:smart_ahwa_manager/feature/order/view/widget/custom_order_item_card.dart';
 
 class CustomOrderList extends StatelessWidget {
   final List orders;

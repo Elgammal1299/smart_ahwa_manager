@@ -4,11 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:smart_ahwa_manager/core/utils/app_colors.dart';
 import 'package:smart_ahwa_manager/core/utils/app_images.dart';
 import 'package:smart_ahwa_manager/core/utils/app_styles.dart';
-import 'package:smart_ahwa_manager/feature/home/report_screen.dart';
-import 'package:smart_ahwa_manager/feature/home/view/home_screen.dart';
-import 'package:smart_ahwa_manager/feature/home/view_model/order_cubit/order_cubit.dart';
+import 'package:smart_ahwa_manager/feature/order/view/report_screen.dart';
+import 'package:smart_ahwa_manager/feature/order/view/add_order_screen.dart';
+import 'package:smart_ahwa_manager/feature/order/view_model/order_cubit/order_cubit.dart';
 import 'package:smart_ahwa_manager/feature/nav_bar/view_model/nav_bar_cubit.dart';
-import 'package:smart_ahwa_manager/feature/home/view/order_screen.dart';
+import 'package:smart_ahwa_manager/feature/order/view/order_screen.dart';
 
 class NavBarScreen extends StatelessWidget {
   const NavBarScreen({super.key});
@@ -23,7 +23,7 @@ class NavBarScreen extends StatelessWidget {
           return IndexedStack(
             index: state,
             children: [
-              HomeScreen(),
+              AddOrderScreen(),
               OrderScreen(),
               ReportsScreen(),
 

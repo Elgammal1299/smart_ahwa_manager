@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:smart_ahwa_manager/core/utils/app_colors.dart';
 import 'package:smart_ahwa_manager/core/utils/app_styles.dart';
-import 'package:smart_ahwa_manager/feature/home/view/widget/add_order_form.dart';
+import 'package:smart_ahwa_manager/feature/order/view/widget/add_order_form.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class AddOrderScreen extends StatelessWidget {
+  const AddOrderScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,4 +31,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

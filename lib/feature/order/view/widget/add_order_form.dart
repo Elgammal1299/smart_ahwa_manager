@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_ahwa_manager/core/utils/app_styles.dart';
 import 'package:smart_ahwa_manager/core/widget/custom_elevated_button.dart';
 import 'package:smart_ahwa_manager/core/widget/custom_text_form.dart';
-import 'package:smart_ahwa_manager/feature/home/data/model/beverage_decorator%20.dart';
-import 'package:smart_ahwa_manager/feature/home/data/model/component_model.dart';
-import 'package:smart_ahwa_manager/feature/home/data/model/order_model.dart';
-import 'package:smart_ahwa_manager/feature/home/view/widget/custom_drinks_dropdown.dart';
-import 'package:smart_ahwa_manager/feature/home/view_model/order_cubit/order_cubit.dart';
+import 'package:smart_ahwa_manager/feature/order/data/model/beverage_decorator%20.dart';
+import 'package:smart_ahwa_manager/feature/order/data/model/component_model.dart';
+import 'package:smart_ahwa_manager/feature/order/data/model/order_model.dart';
+import 'package:smart_ahwa_manager/feature/order/view/widget/custom_drinks_dropdown.dart';
+import 'package:smart_ahwa_manager/feature/order/view_model/order_cubit/order_cubit.dart';
 
 class CustomAddOrderTextField extends StatefulWidget {
   const CustomAddOrderTextField({super.key});
@@ -85,7 +85,6 @@ class _CustomAddOrderTextFeildState extends State<CustomAddOrderTextField> {
         ),
         const SizedBox(height: 20),
 
-        /// العدد
         Text('Quantity', style: AppStyles.styleBold16(context)),
         const SizedBox(height: 6),
         CustomTextForm(
@@ -110,7 +109,6 @@ class _CustomAddOrderTextFeildState extends State<CustomAddOrderTextField> {
           const SizedBox(height: 20),
         ],
 
-        /// الزر
         CustomElevatedButton(
           onPressed: () {
             if (customerNameController.text.isEmpty ||

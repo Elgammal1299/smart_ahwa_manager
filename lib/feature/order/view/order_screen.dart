@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_ahwa_manager/core/utils/app_colors.dart';
 import 'package:smart_ahwa_manager/core/utils/app_styles.dart';
-import 'package:smart_ahwa_manager/feature/home/view/widget/custom_order_list.dart';
-import 'package:smart_ahwa_manager/feature/home/view_model/order_cubit/order_cubit.dart';
+import 'package:smart_ahwa_manager/feature/order/view/widget/custom_order_list.dart';
+import 'package:smart_ahwa_manager/feature/order/view_model/order_cubit/order_cubit.dart';
 
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});

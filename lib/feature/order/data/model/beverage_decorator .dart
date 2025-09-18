@@ -1,4 +1,4 @@
-import 'package:smart_ahwa_manager/feature/home/data/model/component_model.dart';
+import 'package:smart_ahwa_manager/feature/order/data/model/component_model.dart';
 
 abstract class BeverageDecorator extends Beverage {
   final Beverage beverage;

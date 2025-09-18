@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smart_ahwa_manager/feature/home/data/model/order_model.dart';
+import 'package:smart_ahwa_manager/feature/order/data/model/order_model.dart';
 
 part 'order_state.dart';
 
