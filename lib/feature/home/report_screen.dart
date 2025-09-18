@@ -7,12 +7,14 @@ class ReportsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reports = context.read<OrderCubit>().getReports();
+    final cubit = context.read<OrderCubit>();
+    final reports = cubit.getReports();
+
+    final pendingCount = cubit.pendingOrders.length;
+    final completedCount = cubit.completedOrders.length;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("التقارير"),
-      ),
+      appBar: AppBar(title: const Text("التقارير")),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(
@@ -22,6 +24,18 @@ class ReportsScreen extends StatelessWidget {
               value: "${reports["totalRevenue"]?.toStringAsFixed(2)} ج.م",
               color: Colors.green,
               icon: Icons.attach_money,
+            ),
+            _buildReportCard(
+              title: "الطلبات المعلّقة",
+              value: "$pendingCount طلب",
+              color: Colors.orange,
+              icon: Icons.pending_actions,
+            ),
+            _buildReportCard(
+              title: "الطلبات المكتملة",
+              value: "$completedCount طلب",
+              color: Colors.blue,
+              icon: Icons.check_circle,
             ),
             _buildReportCard(
               title: "أكثر مشروب مبيعًا",
@@ -36,7 +50,7 @@ class ReportsScreen extends StatelessWidget {
               value: reports["topAddition"] != null
                   ? "${reports["topAddition"]} (${reports["topAdditionCount"]})"
                   : "لا يوجد بيانات",
-              color: Colors.blue,
+              color: Colors.purple,
               icon: Icons.add_circle,
             ),
           ],
@@ -66,10 +80,7 @@ class ReportsScreen extends StatelessWidget {
         ),
         subtitle: Text(
           value,
-          style: TextStyle(
-            fontSize: 15,
-            color: Colors.grey.shade800,
-          ),
+          style: TextStyle(fontSize: 15, color: Colors.grey.shade800),
         ),
       ),
     );
