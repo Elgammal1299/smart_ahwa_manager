@@ -126,51 +126,69 @@ class _OrderScreenState extends State<OrderScreen>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        order.customerName,
-                        style: AppStyles.styleSemiBold20(context),
+                      // الاسم + الكمية + السعر
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              order.customerName,
+                              style: AppStyles.styleSemiBold20(context),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            "x${order.quantity}",
+                            style: const TextStyle(
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            "${order.price} ج.م",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.success,
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 6),
+                      // المشروب + الإضافة
                       Text(
                         "${order.drink} - ${order.addition ?? "بدون إضافات"}",
                         style: const TextStyle(color: AppColors.textSecondary),
                       ),
-                      Text(
-                        "الكمية: ${order.quantity}",
-                        style: const TextStyle(color: AppColors.textSecondary),
+                      const SizedBox(height: 12),
+                      // الأزرار (يمين/شمال)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.delete,
+                              color: AppColors.error,
+                            ),
+                            onPressed: () {
+                              context.read<OrderCubit>().removeOrder(index);
+                            },
+                          ),
+                          if (isPending)
+                            IconButton(
+                              icon: const Icon(
+                                Icons.check_circle,
+                                color: AppColors.success,
+                              ),
+                              onPressed: () {
+                                context.read<OrderCubit>().completeOrder(index);
+                              },
+                            ),
+                        ],
                       ),
                     ],
                   ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "${order.price} ج.م",
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.success,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    if (isPending)
-                      IconButton(
-                        icon: const Icon(
-                          Icons.check_circle,
-                          color: AppColors.success,
-                        ),
-                        onPressed: () {
-                          context.read<OrderCubit>().completeOrder(index);
-                        },
-                      ),
-                    IconButton(
-                      icon: const Icon(Icons.delete, color: AppColors.error),
-                      onPressed: () {
-                        context.read<OrderCubit>().removeOrder(index);
-                      },
-                    ),
-                  ],
                 ),
               ],
             ),
