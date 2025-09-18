@@ -8,7 +8,7 @@ import 'package:smart_ahwa_manager/feature/home/report_screen.dart';
 import 'package:smart_ahwa_manager/feature/home/view/home_screen.dart';
 import 'package:smart_ahwa_manager/feature/home/view_model/order_cubit/order_cubit.dart';
 import 'package:smart_ahwa_manager/feature/nav_bar/view_model/nav_bar_cubit.dart';
-import 'package:smart_ahwa_manager/feature/order_screen.dart';
+import 'package:smart_ahwa_manager/feature/home/view/order_screen.dart';
 
 class NavBarScreen extends StatelessWidget {
   const NavBarScreen({super.key});

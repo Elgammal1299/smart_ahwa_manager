@@ -6,6 +6,7 @@ import 'package:smart_ahwa_manager/core/widget/custom_text_form.dart';
 import 'package:smart_ahwa_manager/feature/home/data/model/beverage_decorator%20.dart';
 import 'package:smart_ahwa_manager/feature/home/data/model/component_model.dart';
 import 'package:smart_ahwa_manager/feature/home/data/model/order_model.dart';
+import 'package:smart_ahwa_manager/feature/home/view/widget/custom_drinks_dropdown.dart';
 import 'package:smart_ahwa_manager/feature/home/view_model/order_cubit/order_cubit.dart';
 
 class CustomAddOrderTextField extends StatefulWidget {
@@ -20,17 +21,16 @@ class _CustomAddOrderTextFeildState extends State<CustomAddOrderTextField> {
   final TextEditingController customerNameController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
 
-  // المشروبات المتاحة
   final List<String> drinks = ["شاي", "قهوة", "عصير", "نسكافيه"];
   String? selectedDrink;
 
-  // إضافات لكل مشروب
   final Map<String, List<String>> additionsMap = {
     "شاي": ["نعناع", "سكر زيادة", "سكر قليل", "لبن"],
     "قهوة": ["لبن", "بدون سكر", "سكر زيادة", "بندق"],
     "عصير": ["ثلج", "بدون سكر"],
     "نسكافيه": ["لبن", "سكر قليل", "سكر زيادة"],
   };
+
   final Map<String, Beverage Function()> beveragesFactory = {
     "شاي": () => Tea(),
     "قهوة": () => Coffee(),
@@ -55,7 +55,6 @@ class _CustomAddOrderTextFeildState extends State<CustomAddOrderTextField> {
 
   @override
   Widget build(BuildContext context) {
-    // الإضافات الخاصة بالمشروب الحالي
     final List<String> availableAdditions = selectedDrink != null
         ? additionsMap[selectedDrink]!
         : [];
@@ -63,7 +62,6 @@ class _CustomAddOrderTextFeildState extends State<CustomAddOrderTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        /// اسم العميل
         Text('Customer name', style: AppStyles.styleBold16(context)),
         const SizedBox(height: 6),
         CustomTextForm(
@@ -72,25 +70,18 @@ class _CustomAddOrderTextFeildState extends State<CustomAddOrderTextField> {
         ),
         const SizedBox(height: 20),
 
+        /// المشروب
         Text('The drink', style: AppStyles.styleBold16(context)),
         const SizedBox(height: 6),
-        DropdownButtonFormField<String>(
-          initialValue: selectedDrink,
-          items: drinks
-              .map(
-                (drink) => DropdownMenuItem(value: drink, child: Text(drink)),
-              )
-              .toList(),
+        CustomDrinksDropdown(
+          drinks: drinks,
+          selectedDrink: selectedDrink,
           onChanged: (value) {
             setState(() {
               selectedDrink = value;
               selectedAddition = null;
             });
           },
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: "Choose a drink",
-          ),
         ),
         const SizedBox(height: 20),
 
@@ -107,27 +98,19 @@ class _CustomAddOrderTextFeildState extends State<CustomAddOrderTextField> {
         if (selectedDrink != null) ...[
           Text('Additions', style: AppStyles.styleBold16(context)),
           const SizedBox(height: 6),
-          DropdownButtonFormField<String>(
-            initialValue: selectedAddition,
-            items: availableAdditions
-                .map(
-                  (addition) =>
-                      DropdownMenuItem(value: addition, child: Text(addition)),
-                )
-                .toList(),
+          AdditionsDropdown(
+            additions: availableAdditions,
+            selectedAddition: selectedAddition,
             onChanged: (value) {
               setState(() {
                 selectedAddition = value;
               });
             },
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: "Choose an addition",
-            ),
           ),
           const SizedBox(height: 20),
         ],
 
+        /// الزر
         CustomElevatedButton(
           onPressed: () {
             if (customerNameController.text.isEmpty ||
@@ -136,10 +119,8 @@ class _CustomAddOrderTextFeildState extends State<CustomAddOrderTextField> {
               return;
             }
 
-            // إنشاء المشروب من الـ Map
             Beverage beverage = beveragesFactory[selectedDrink!]!();
 
-            // تطبيق الإضافة (لو فيه)
             if (selectedAddition != null &&
                 additionsFactory.containsKey(selectedAddition)) {
               final decorator = additionsFactory[selectedAddition];
@@ -148,22 +129,19 @@ class _CustomAddOrderTextFeildState extends State<CustomAddOrderTextField> {
               }
             }
 
-            // حساب السعر
             final double totalPrice =
                 beverage.cost() * int.parse(quantityController.text);
 
-            // حفظ الطلب
             context.read<OrderCubit>().addOrder(
               OrderModel(
                 customerName: customerNameController.text,
-                drink: beverage.description, // لاحظ: مع الإضافة
+                drink: beverage.description,
                 addition: selectedAddition,
                 quantity: int.parse(quantityController.text),
                 price: totalPrice,
               ),
             );
 
-            // Reset
             setState(() {
               customerNameController.clear();
               quantityController.clear();
@@ -171,7 +149,6 @@ class _CustomAddOrderTextFeildState extends State<CustomAddOrderTextField> {
               selectedAddition = null;
             });
           },
-
           text: 'Add Order',
         ),
       ],
