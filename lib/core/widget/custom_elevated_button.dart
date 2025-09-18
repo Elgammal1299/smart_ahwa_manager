@@ -41,7 +41,7 @@ class CustomElevatedButton extends StatelessWidget {
           onPressed: onPressed,
           icon: icon,
           iconAlignment: IconAlignment.start,
-          style: OutlinedButton.styleFrom(
+          style: ElevatedButton.styleFrom(
             shadowColor: Colors.transparent,
             overlayColor: overlayColor ?? AppColors.primary,
             side: BorderSide(color: borderColor ?? Colors.transparent),

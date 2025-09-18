@@ -4,8 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:smart_ahwa_manager/core/utils/app_colors.dart';
 import 'package:smart_ahwa_manager/core/utils/app_images.dart';
 import 'package:smart_ahwa_manager/core/utils/app_styles.dart';
-import 'package:smart_ahwa_manager/feature/home/home_screen.dart';
+import 'package:smart_ahwa_manager/feature/home/report_screen.dart';
+import 'package:smart_ahwa_manager/feature/home/view/home_screen.dart';
+import 'package:smart_ahwa_manager/feature/home/view_model/order_cubit/order_cubit.dart';
 import 'package:smart_ahwa_manager/feature/nav_bar/view_model/nav_bar_cubit.dart';
+import 'package:smart_ahwa_manager/feature/order_screen.dart';
 
 class NavBarScreen extends StatelessWidget {
   const NavBarScreen({super.key});
@@ -21,8 +24,8 @@ class NavBarScreen extends StatelessWidget {
             index: state,
             children: [
               HomeScreen(),
-              Scaffold(body: Text('dataaa')),
-              Scaffold(body: Text('dataaa')),
+              OrderScreen(),
+              ReportsScreen(),
 
               // ProfileScreen(),
             ],
@@ -44,7 +47,6 @@ class NavBarScreen extends StatelessWidget {
               ],
             ),
             child: BottomNavigationBar(
-              
               selectedFontSize: 14,
               unselectedFontSize: 14,
               backgroundColor: Colors.white,
